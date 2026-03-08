@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二手车价格预测 - 模型性能分析报告</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        h2 {
+            border-left: 5px solid #3498db;
+            padding-left: 15px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Model Overview Section */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+        .model-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+        .model-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #34495e;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .chart-container {
+            margin-bottom: 20px;
+        }
+        .chart-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .chart-title {
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 5px;
+            color: #7f8c8d;
+        }
+
+        /* Feature Engineering & Comparison Sections */
+        .analysis-section {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .analysis-section img {
+            max-width: 80%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #95a5a6;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 二手车价格预测 - 模型性能分析报告</h1>
+            <p>基于机器学习的多模型对比与特征工程效果评估</p>
+        </header>
+
+        <!-- 1. 模型横向对比 -->
+        <section id="model-comparison">
+            <h2>🏆 模型横向对比 (MAE)</h2>
+            <div class="analysis-section">
+                <p>各单模型与集成模型在测试集上的平均绝对误差 (MAE) 对比，MAE 越低代表模型性能越好。</p>
+                <img src="模型MAE对比图.png" alt="模型MAE对比图">
+            </div>
+        </section>
+
+        <!-- 2. 模型概览区域 -->
+        <section id="model-overview">
+            <h2>📈 模型概览 (详细指标)</h2>
+            <div class="model-grid">
+                
+                <!-- Extra Trees -->
+                <div class="model-card">
+                    <div class="model-title">Extra Trees (极限随机树)</div>
+                    <div class="chart-container">
+                        <img src="ExtraTrees/预测值vs真实值.png" alt="ExtraTrees 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="ExtraTrees/残差分布.png" alt="ExtraTrees 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="ExtraTrees/特征重要性.png" alt="ExtraTrees 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+
+                <!-- LightGBM -->
+                <div class="model-card">
+                    <div class="model-title">LightGBM</div>
+                    <div class="chart-container">
+                        <img src="LightGBM/预测值vs真实值.png" alt="LightGBM 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="LightGBM/残差分布.png" alt="LightGBM 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="LightGBM/特征重要性.png" alt="LightGBM 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+
+                <!-- XGBoost -->
+                <div class="model-card">
+                    <div class="model-title">XGBoost</div>
+                    <div class="chart-container">
+                        <img src="XGBoost/预测值vs真实值.png" alt="XGBoost 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="XGBoost/残差图.png" alt="XGBoost 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="XGBoost/特征重要性.png" alt="XGBoost 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+
+                <!-- MLP -->
+                <div class="model-card">
+                    <div class="model-title">MLP (神经网络)</div>
+                    <div class="chart-container">
+                        <img src="MLP/预测值vs真实值.png" alt="MLP 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="MLP/残差分布.png" alt="MLP 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="MLP/特征重要性.png" alt="MLP 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+                
+                <!-- Random Forest (Optional but good to have) -->
+                <div class="model-card">
+                    <div class="model-title">Random Forest (随机森林)</div>
+                    <div class="chart-container">
+                        <img src="随机森林/随机森林预测分析.png" alt="Random Forest 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="随机森林/随机森林残差分布.png" alt="Random Forest 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="随机森林/随机森林特征重要性.png" alt="Random Forest 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+
+                <!-- Decision Tree -->
+                <div class="model-card">
+                    <div class="model-title">Decision Tree (决策树)</div>
+                    <div class="chart-container">
+                        <img src="决策树/决策树预测分析.png" alt="Decision Tree 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <!-- 决策树可能没有专门的残差图，或者使用结构图代替 -->
+                        <img src="决策树/决策树结构图.png" alt="Decision Tree 结构图">
+                        <div class="chart-title">决策树结构图</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="决策树/决策树特征重要性.png" alt="Decision Tree 特征重要性">
+                        <div class="chart-title">特征重要性</div>
+                    </div>
+                </div>
+
+                <!-- Ridge Regression -->
+                <div class="model-card">
+                    <div class="model-title">Ridge Regression (岭回归)</div>
+                    <div class="chart-container">
+                        <img src="岭回归/预测值vs实际值.png" alt="Ridge 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="岭回归/残差分布图.png" alt="Ridge 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="岭回归/岭回归特征系数重要性排序图.png" alt="Ridge 特征系数">
+                        <div class="chart-title">特征系数重要性</div>
+                    </div>
+                </div>
+
+                <!-- Lasso Regression -->
+                <div class="model-card">
+                    <div class="model-title">Lasso Regression (套索回归)</div>
+                    <div class="chart-container">
+                        <img src="套索回归/预测值vs实际值.png" alt="Lasso 预测vs真实">
+                        <div class="chart-title">预测值 vs 真实值</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="套索回归/残差分布图.png" alt="Lasso 残差分布">
+                        <div class="chart-title">残差分布</div>
+                    </div>
+                    <div class="chart-container">
+                        <img src="套索回归/套索回归特征系数重要性排序图.png" alt="Lasso 特征系数">
+                        <div class="chart-title">特征系数重要性</div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <p>Generated by Trae AI Pair Programmer | 2026</p>
+        </footer>
+    </div>
+</body>
+</html>
